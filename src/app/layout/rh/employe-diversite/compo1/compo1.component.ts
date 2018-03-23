@@ -62,13 +62,13 @@ export class Compo1Component implements OnInit {
                         left: 0
                     }
                 },
-                tooltip: {
+               /* tooltip: {
                          contentGenerator: function (e) {
                 
                           console.log('elementClick in callback', e);
                       
                         }
-                  }
+                  }*/
             }
         };
 
