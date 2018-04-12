@@ -17,7 +17,6 @@ export class LineChartComponent implements OnInit {
 
 
   ngOnInit(){
-    
     this.options = {
       chart: {
         type: 'lineChart',
@@ -40,11 +39,21 @@ export class LineChartComponent implements OnInit {
             return d3.format('.02f')(d);
           },
           axisLabelDistance: -10
-        }
+        },
+        /* lines:{
+           dispatch:{
+             elementClick:function(e){console.log("click");}
+           }
+         },
+        callback: function(e){
+          console.log("callback");
+        }*/
       }
     };
   
     this.data = this.sinAndCos();
+   // console.log("chart created");
+   // alert("console")
   }
   
   

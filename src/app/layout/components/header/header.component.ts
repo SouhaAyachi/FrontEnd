@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
 
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
-        return dom.classList.contains(this.pushRightClass);
+        return !(dom.classList.contains(this.pushRightClass));
     }
 
     toggleSidebar() {

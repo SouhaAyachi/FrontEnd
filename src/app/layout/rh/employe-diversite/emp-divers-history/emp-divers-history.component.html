@@ -1,0 +1,25 @@
+<a [routerLink]="['/EmpDiv/EmpDiv2']"><h2> <= Back = </h2></a>
+
+
+<div class="row mt-3">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">Nombre Employés
+			
+				<div ngbDropdown class="d-inline-block dropdown pull-right">
+				<button class="btn btn-outline-primary" ngbDropdownToggle></button>
+					
+                    <div ngbDropdownMenu>
+                        <button class="dropdown-item">Action</button>
+						<button class="dropdown-item">Another Action</button>
+                        <button class="dropdown-item">Something else is here</button>
+                    </div>
+                </div>
+			
+			</div>
+            <div class="card-body">
+              <nvd3 [options]="options" [data]="data"></nvd3>
+            </div>
+        </div>
+    </div>
+</div>

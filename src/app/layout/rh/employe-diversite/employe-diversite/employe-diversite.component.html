@@ -1,0 +1,459 @@
+
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+</div>
+<div class="row">
+<div class="col-sm-3">
+<app-stat [bgClass]="'primary'"  [count]="[nbEmpTotal]" [label]="'Employés'" ></app-stat>
+</div>
+<div class="col-sm-3">
+<app-stat [bgClass]="'warning'"  [count]="[ageMoyen]" [label]="'Age Moyen des Employés'" ></app-stat>
+</div>
+<div class="col-sm-3">
+<app-stat [bgClass]="'success'"  [count]="[ancienneteMoyenne]" [label]="'Ancienneté Moyenne'" ></app-stat>
+</div>
+<div class="col-sm-3">
+    <br><br>
+    <a [routerLink]="['/EmpDiv/EmpDivDetaille']"><h2> = visit History =></h2></a>
+</div>
+</div>
+<!--div class="card text-white bg-{{bgClass}}">
+    <div class="card-header">
+        <div class="row">
+            <div class="col col-xs-3">
+                <i class="fa {{icon}} fa-5x"></i>
+            </div>
+            <div class="col col-xs-9 text-right">
+                <div class="d-block huge"><!--{{count}}></div>
+                <div class="d-block"><!--{{label}}></div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <span class="float-left">View Details <!--{{data}}</span>
+        <a href="javascript:void(0)" class="float-right card-inverse">
+            <span ><i class="fa fa-arrow-circle-right"></i></span>
+        </a>
+    </div>
+</div-->
+
+<!--- ANb Employé 1.1 - -->
+<div class="row mt-3">
+        <div class="col-sm-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">Analyser Nombre d'employés
+                    <div ngbDropdown class="d-inline-block dropdown pull-right">
+                    <button class="btn btn-outline-primary" ngbDropdownToggle>{{nbParVar}}</button>
+                        <div ngbDropdownMenu>
+                        <button class="dropdown-item" (click)="nbPar('genre')">Par Genre</button>
+                        <button class="dropdown-item" (click)="nbPar('structure')">Par Structure</button>
+                        <button class="dropdown-item" (click)="nbPar('grade')">Par Grade</button>
+                        <button class="dropdown-item" (click)="nbPar('fonction')">Par Fonction</button>
+                        <ng-template #content let-c="close" let-d="dismiss"></ng-template>
+                        </div>
+                    </div>
+                    </div>
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-lg-10">
+                        
+                       <div id="nbParGenre" style="display:block;" > 
+                             <div id="nbParGenrePie" style="display:block" *ngIf="nb_emp_par_genre">
+                                <app-nb-emp-par-genre ></app-nb-emp-par-genre>
+                                </div>
+                                <div id="nbParGenreBar" style="display:none;" *ngIf="nb_emp_par_genre">
+                                <app-discret-bar-chart  [d]="nb_emp_par_genre" [height]="450" [key]="'Nb emp Par genre'" [XAxis]="'Genres'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>         
+                            </div>   
+                            </div> 
+                    <div id="nbParStructure" style="display:none;" > 
+                        <div id="nbParStructurePie" style="display:block;" *ngIf="nb_emp_par_structure">
+                            <app-pie-chart [d]="nb_emp_par_structure"></app-pie-chart>
+                        </div>
+                        <div id="nbParStructureBar" style="display:none;" *ngIf="nb_emp_par_structure">
+                           <app-discret-bar-chart  [d]="nb_emp_par_structure" [height]="450" [key]="'Nb emp Par structure'" [XAxis]="'Structures'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                        </div>
+                        </div>
+                        <div id="nbParGrade" style="display:none;">  
+                                <div id="nbParGradePie" style="display:block;" *ngIf="nb_emp_par_grade">
+                                <app-pie-chart [d]="nb_emp_par_grade"></app-pie-chart>
+                                </div>
+                                <div id="nbParGradeBar" style="display:none;" *ngIf="nb_emp_par_grade">
+                                <app-discret-bar-chart  [d]="nb_emp_par_grade" [height]="450" [key]="'Nb emp Par grade'" [XAxis]="'Grades'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                                </div>
+                        </div>     
+                    </div> 
+                        <div class="col-lg-2"><br><br><br><br><br>
+                            <button type="button"  (click)="nbParChangeGraphe('pie')">Pie</button><br><br>
+                            <button type="button"  (click)="nbParChangeGraphe('bar')">Bar</button><br><br>
+                            <button type="button"  (click)="nbParChangeGraphe('tab')">Tab</button><br><br>
+                                  
+                        </div>   
+                    </div>
+                    
+                </div>                               
+                </div>
+            </div>
+   <!--age moyen-->
+        <div class="col-sm-12 col-lg-6">
+            <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">Age moyen Par Structure
+                    <div ngbDropdown class="d-inline-block dropdown pull-right">
+                    <button class="btn btn-outline-primary" ngbDropdownToggle></button>
+                        
+                        <div ngbDropdownMenu>
+                            <button class="dropdown-item" (click)="open(content)">Action</button>
+                        </div>
+                    </div>
+                    </div>
+                <div class="card-body">
+                  <app-discret-bar-chart *ngIf="age_moyen_par_structure" [d]="age_moyen_par_structure" [height]="200" [key]="'Age moyen par structure'" [XAxis]="'Structures'" [YAxis]="'Age moyen d\'mployés'"></app-discret-bar-chart>         
+                   </div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-sm-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header"> Ancienneté moyenne Par structure
+                        <div ngbDropdown class="d-inline-block dropdown pull-right">
+                        <button class="btn btn-outline-primary" ngbDropdownToggle></button>
+                            
+                            <div ngbDropdownMenu>
+                                <button class="dropdown-item" (click)="open(content)">Action</button>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="card-body">
+                            <app-discret-bar-chart *ngIf="anciennete_moyenne_par_structure" id="app-discret-bar-chart" [d]="anciennete_moyenne_par_structure" [height]="200" [key]="'Anciennete moyenne par structure'" [XAxis]="'Structures'" [YAxis]="'Ancienneté moyenne d\'mployés'"></app-discret-bar-chart>
+                        </div>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+    
+
+
+<div class="row mt-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">Nombre d'employés 
+				<div ngbDropdown class="d-inline-block dropdown pull-right">
+				<button class="btn btn-outline-primary" ngbDropdownToggle></button>
+					
+                    <div ngbDropdownMenu>
+                        <button class="dropdown-item" (click)="open(content)">Action</button>
+					<ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal title</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                    </div>
+                </ng-template>
+                        <button class="dropdown-item">Par Catégories</button>
+                        <button class="dropdown-item">Par structures</button>
+                    </div>
+                </div>
+				</div>
+            <div class="card-body">
+                <ngb-tabset>
+                    <ngb-tab title="Par Genre">
+                        <ng-template ngbTabContent>
+                           <app-nb-emp-par-genre></app-nb-emp-par-genre>
+                        </ng-template>
+                    </ngb-tab>
+                   
+                        <ngb-tab title="Par Categorie En bar et en Pie">
+                        <ng-template ngbTabContent>
+                            <button type="button"  (click)="changeToPie_nb_categorie()">Pie</button>
+                            <button type="button"  (click)="changeToBar_nb_categorie()">Bar</button>
+                            <div id="nb_categorie_bar" style="display:none;">
+                                <app-discret-bar-chart [d]="nb_emp_par_categorie" [height]="450"[key]="'Nb emp Par categorie'" [XAxis]="'Categories'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                            </div>
+                           <div  id="nb_categorie_pie" style="display:block;" >
+                            <app-pie-chart  [d]="nb_emp_par_categorie"></app-pie-chart>
+                            </div>
+                          
+                        </ng-template>
+                    </ngb-tab>
+                   
+                    <ngb-tab title="Par Grade" [disabled]="false">
+                            <ng-template ngbTabContent>
+                                <app-discret-bar-chart [d]="nb_emp_par_grade" [height]="450" [key]="'Nb emp Par grade'" [XAxis]="'Grades'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                            </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Par Structure" [disabled]="false">
+                        <ng-template ngbTabContent>
+                            <app-discret-bar-chart [d]="nb_emp_par_structure" [height]="450" [key]="'Nb emp Par structure'" [XAxis]="'Structures'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                        </ng-template>
+                    </ngb-tab>
+                   
+                    <ngb-tab title="Par Postes" [disabled]="false">
+                            <ng-template ngbTabContent>
+                                 <app-discret-bar-chart [d]="nb_emp_par_poste" [height]="450" [key]="'Nb emp Par poste'" [XAxis]="'Postes'" [YAxis]="'Nombre d\'employés'"></app-discret-bar-chart>
+                            </ng-template>
+                     </ngb-tab> 
+                     <ngb-tab title="Par Fonction" [disabled]="false">
+                            <ng-template ngbTabContent>
+                                <app-discret-bar-chart [d]="nb_emp_par_fonction" [height]="450" [key]="'Nb emp Par fonction'" [XAxis]="'Fonctions'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                               
+                            </ng-template>
+                    </ngb-tab>    
+                    <ngb-tab title="Par Structure2" [disabled]="false">
+                        <ng-template ngbTabContent>
+                            <app-discret-bar-chart [d]="nb_emp_par_genre" [height]="450"  [key]="'nb Emp par genre'" [XAxis]="'Genre'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                        </ng-template>
+                </ngb-tab>             
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--- Anciennete Moyenne - -->
+<div class="row mt-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">Anciennete moyenne des employés
+                <div ngbDropdown class="d-inline-block dropdown pull-right">
+                <button class="btn btn-outline-primary" ngbDropdownToggle></button>
+                    
+                    <div ngbDropdownMenu>
+                        <button class="dropdown-item" (click)="open(content)">Action</button>
+                    <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal title</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                    </div>
+                </ng-template>
+                        <button class="dropdown-item">Par Catégories</button>
+                        <button class="dropdown-item">Par structures</button>
+                    </div>
+                </div>
+                </div>
+            <div class="card-body">
+                <ngb-tabset>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle><b>Par Genre</b></ng-template>
+                        <ng-template ngbTabContent>
+                            Anciennete par genre   
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Par Structure">
+                            <ng-template ngbTabContent>
+                                 <app-discret-bar-chart id="app-discret-bar-chart" [height]="450" [d]="anciennete_moyenne_par_structure" [key]="'Anciennete moyenne par structure'" [XAxis]="'Structures'" [YAxis]="'Ancienneté moyenne d\'mployés'"></app-discret-bar-chart>
+                            </ng-template>
+                    </ngb-tab>        
+                    <ngb-tab title="Delai" [disabled]="false">
+                        <ng-template ngbTabContent>
+                            <div ngbDropdown class="d-inline-block dropdown pull-center">
+                                <button class="btn btn-outline-primary" ngbDropdownToggle></button>
+                                    <div ngbDropdownMenu>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2015)">2015</button>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2016)">2016</button>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2017)">2017</button>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2018)">2018</button>
+                                     </div>
+                                </div>
+                                <p align="center"><b>{{year}}</b></p>
+                            <app-stacked-bar-chart [d]="delai" [XLabel]="'Sessions'" [YLabel]="'Durées'"></app-stacked-bar-chart>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab title="Nb Ambauche" [disabled]="false">
+                        <ng-template ngbTabContent>
+                                <!--select ng-model="yearEmbauche" ng-change="embauchePerYear(2017)">
+                                    <option *ngFor="let a of yearsEmbauche;" >{{a}}</option>
+                                </select-->
+
+                                <div ngbDropdown class="d-inline-block dropdown pull-center">
+                                    <button class="btn btn-outline-primary" ngbDropdownToggle>{{yearEmbauche}}</button>
+                                        <div ngbDropdownMenu style="height:200px;overflow-y: scroll;">
+                                            <button *ngFor="let a of yearsEmbauche;" class="dropdown-item" (click)="embauchePerYear(a)">{{a}}</button>
+                                         </div>
+                                    </div>
+
+                               <p> Nb d'embauche totale: {{nbEmbaucheperYear}}</p>
+                                <app-discret-bar-chart #embauchID  [d]="nbEmbauche"  [height]="450" [key]="'Nb Embauches'" [XAxis]="'Fonctions'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                                <!--button (click)="embauchePerYear(2017)">ClickHer</button-->
+                            </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--- Age Moyen - -->
+<div class="row mt-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">Age moyen des employés
+				<div ngbDropdown class="d-inline-block dropdown pull-right">
+				<button class="btn btn-outline-primary" ngbDropdownToggle></button>
+					
+                    <div ngbDropdownMenu>
+                        <button class="dropdown-item" (click)="open(content)">Action</button>
+					<ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal title</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="c('Close click')"></button>
+                    </div>
+                </ng-template>
+                        <button class="dropdown-item">Par Catégories</button>
+                        <button class="dropdown-item">Par structures</button>
+                    </div>
+                </div>
+				</div>
+            <div class="card-body">
+                <ngb-tabset> 
+                <ngb-tab>
+                    <ng-template ngbTabTitle><b>Par Genre</b></ng-template>
+                    <ng-template ngbTabContent>
+                            Age Moyen par genre
+                    </ng-template>
+                </ngb-tab>
+                
+               
+                    <ngb-tab title="Par Structure">
+                        <ng-template ngbTabContent>
+                                <app-discret-bar-chart [d]="age_moyen_par_structure" [height]="450" [key]="'Age moyen par structure'" [XAxis]="'Structures'" [YAxis]="'Age moyen d\'mployés'"></app-discret-bar-chart>         
+                            
+                          
+                        </ng-template>
+                    </ngb-tab>
+                    
+                    <ngb-tab title="Disabled" [disabled]="false">
+                        <ng-template ngbTabContent>
+                         </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+
+
+
+    <div class="row mt-3">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">Pills
+			
+				<div ngbDropdown class="d-inline-block dropdown pull-right">
+				<button class="btn btn-outline-primary" ngbDropdownToggle></button>
+					
+                    <div ngbDropdownMenu>
+                        <button class="dropdown-item">Action</button>
+						<button class="dropdown-item">Another Action</button>
+                        <button class="dropdown-item">Something else is here</button>
+                    </div>
+                </div>
+			
+			</div>
+            <div class="card-body">
+              <nvd3 [options]="options" [data]="data"></nvd3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+   <!--app-tabs></app-tabs-->
+
+<hr>
+
+
+
+<hr><br>
+
+<table style="width:100%" border="1">
+<tr>
+<td colspa="2">
+<!--nvd3 [options]="options" [data]="data"></nvd3-->
+</td>
+</tr>
+<tr>
+<td>
+<div style="width:100%; height:auto;">
+<app-line-chart></app-line-chart>
+</div>
+</td>
+
+<td>
+
+<div style="width:100%; height:auto;">
+<app-barchart></app-barchart>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div style="width:100%; height:auto;">
+<!--app-pie-chart></app-pie-chart-->
+</div>
+</td>
+<td>
+<div style="width:100%; height:auto;">
+<app-donut-chart></app-donut-chart>
+</div>
+</td>
+</tr>
+
+</table>
+
+<hr>
+
+<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Modal title</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="c('Close click')"></button>
+        </div>
+    </ng-template>
+
+
+
+

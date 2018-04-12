@@ -1,0 +1,22 @@
+<p>
+  data-table1 works!
+</p>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+      <tr>
+          <th>Structure</th>
+          <th>Annee</th>
+          <th>Nb sessions</th>
+          <th>Mode Recrutement</th>
+         
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor='let itemo of item' >
+          <td>{{itemo.structur}}</td>
+          <td>{{itemo.year}}</td>
+          <td>{{itemo.count}}</td>
+          <td>{{itemo.moderec}}</td>
+      </tr>
+  </tbody>
+</table>

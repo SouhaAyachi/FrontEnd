@@ -1,0 +1,129 @@
+<p>
+  recrutement works!
+</p>
+
+<!--div class="row">
+        <div class="col-md-12">
+            <ngb-carousel>
+                <ng-template ngbSlide >
+                   <p style="background: rgb(236, 6, 6);">aaaaaaaaaaa</p>
+                </ng-template>
+                <ng-template ngbSlide >
+                        <p style="background: rgb(236, 6, 6);">bbbb</p>
+                     </ng-template>
+            </ngb-carousel>
+        </div>
+    </div-->
+
+<!--- Anciennete Moyenne - -->
+<div class="row mt-3">
+    <div class="col-sm-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">Embauche au fil des années
+                <div ngbDropdown class="d-inline-block dropdown pull-right">
+                <button class="btn btn-outline-primary" ngbDropdownToggle></button>
+                    
+                    <div ngbDropdownMenu>
+                    <button class="dropdown-item" (click)="open(content)">Action</button>
+                    </div>
+                </div>
+                </div>
+            <div class="card-body">   
+                <ngb-tabset>  
+                        <ngb-tab title="Evolution Nb d'Embauche">
+                                <ng-template ngbTabContent>
+                                        <div *ngIf="EvolutionNbEmbauche">
+                                                <button class="dropdown-item" (click)="open(miaw)">detail</button>
+                                            <app-line-chart2  [d]="EvolutionNbEmbauche"  [key]="'Evolution Nb Embauches'" [XAxis]="'années'" [YAxis]="'NB Ambauche'"></app-line-chart2 >
+                                         </div>     
+                                    </ng-template>
+                            </ngb-tab>      
+                        <ngb-tab title="Plus de détailles">
+                                <ng-template #Detail ngbTabContent>
+                                        <div ngbDropdown class="d-inline-block dropdown pull-center">
+                                            <button class="btn btn-outline-primary" ngbDropdownToggle>{{yearEmbauche}}</button>
+                                                <div ngbDropdownMenu style="height:200px;overflow-y: scroll;">
+                                                    <button *ngFor="let a of yearsEmbauche;" class="dropdown-item" (click)="embauchePerYear(a)">{{a}}</button>
+                                                 </div>
+                                            </div>
+                                         <div *ngIf="nbEmbauche">
+                                            <p> Nb d'embauche totale: {{nbEmbaucheperYear}}</p>
+                                            <app-discret-bar-chart  #embauchID  [d]="nbEmbauche" [key]="'Nb Embauches'" [XAxis]="'Fonctions'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                                         </div>     
+                                    </ng-template>
+                            </ngb-tab>   
+                            <ngb-tab title="Taux Effectif">
+                                    <ng-template ngbTabContent>
+                                            <div *ngIf="tauxEffectif && nbEntree">
+                                                    <button class="dropdown-item" (click)="open(miaw)">detail</button>
+                                                <app-general-line-chart  [d]="tauxEffectif" [key]="'Evolution Taux Effectif'" [XAxis]="'années'" [YAxis]="'Taux Effectifs'"></app-general-line-chart >
+                                             </div>     
+                                        </ng-template>
+                            </ngb-tab> 
+                            <ngb-tab title="Nb Retraite">
+                                <ng-template ngbTabContent>
+                                        <div *ngIf="nbRetraite">
+                                                <button class="dropdown-item" (click)="open(miaw)">detail</button>
+                                            <app-line-chart-retraite  [d]="nbRetraite"></app-line-chart-retraite>
+                                         </div>     
+                                    </ng-template>
+                        </ngb-tab>                 
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <app-data-table1></app-data-table1>
+
+</div>
+
+
+<!--- Anciennete Moyenne - -->
+<div class="row mt-3">
+        <div class="col-sm-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">Delai
+                    <div ngbDropdown class="d-inline-block dropdown pull-right">
+                    <button class="btn btn-outline-primary" ngbDropdownToggle></button>
+                        <div ngbDropdownMenu>
+                        <button class="dropdown-item" (click)="open(content2)">Action</button>
+                        <ng-template #content2 let-c="close" let-d="dismiss"></ng-template>
+                        </div>
+                    </div>
+                    </div>
+                <div class="card-body">
+                        <ngb-tabset>  
+                    <ngb-tab title="Delai">
+                        <ng-template ngbTabContent>
+                            <div ngbDropdown class="d-inline-block dropdown pull-center">
+                                <button class="btn btn-outline-primary" ngbDropdownToggle>{{year}}</button>
+                                    <div ngbDropdownMenu>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2015)">2015</button>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2016)">2016</button>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2017)">2017</button>
+                                        <button class="dropdown-item" (click)="delaiPerYear(2018)">2018</button>
+                                     </div>
+                                </div>
+                                <div *ngIf="delai">
+                                <p align="center"><b>{{year}}</b></p>
+                            <app-stacked-bar-chart  [d]="delai" [XLabel]="'Sessions'" [YLabel]="'Durées'"></app-stacked-bar-chart>
+                        </div>    
+                        </ng-template>
+                    </ngb-tab>  
+                    </ngb-tabset>         
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <ng-template #miaw>
+            <div ngbDropdown class="d-inline-block dropdown pull-center">
+                    <button class="btn btn-outline-primary" ngbDropdownToggle>{{yearEmbauche}}</button>
+                        <div ngbDropdownMenu style="height:200px;overflow-y: scroll;">
+                            <button *ngFor="let a of yearsEmbauche;" class="dropdown-item" (click)="embauchePerYear(a)">{{a}}</button>
+                         </div>
+                    </div>
+        <app-embauche-par-year-par-fctn></app-embauche-par-year-par-fctn>
+    </ng-template>

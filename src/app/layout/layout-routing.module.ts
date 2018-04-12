@@ -16,7 +16,9 @@ const routes: Routes = [
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
-			{ path: 'EmpDiv', loadChildren: './rh/rh.module#RhModule' }
+            { path: 'EmpDiv', loadChildren: './rh/employe-diversite/employe-diversite.module#EmployeDiversiteModule' },
+            { path: 'Recrutement', loadChildren: './rh/recrutement/recrutement.module#RecrutementModule' },
+           
         ]
     }
 ];

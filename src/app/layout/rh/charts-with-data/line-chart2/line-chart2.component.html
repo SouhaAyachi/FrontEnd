@@ -1,0 +1,12 @@
+
+<nvd3 [options]="options" [data]="data"></nvd3>
+
+  	<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-body  modal-lg-9">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            <b>{{year}}</b>
+            <app-embauche-par-year-par-fctn [year]="year"></app-embauche-par-year-par-fctn>
+        </div>
+    </ng-template>

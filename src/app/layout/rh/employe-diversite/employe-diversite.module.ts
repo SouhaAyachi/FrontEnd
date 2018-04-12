@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 
 import { EmployeDiversiteRoutingModule } from './employe-diversite-routing.module';
-import { Compo1Component } from './compo1/compo1.component';
+import { EmployeDiversiteComponent } from './employe-diversite/employe-diversite.component';
 
 import { EmpDiversiteService } from './employe-diversite.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,59 +13,33 @@ import 'd3';
 import 'nvd3';
 
 import { BarchartComponent } from './shared/barchart/barchart.component';
-import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
+//import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 import { LineChartComponent } from './shared/line-chart/line-chart.component';
 import { DonutChartComponent } from './shared/donut-chart/donut-chart.component';
-
-
-
 
 /////////////////
 
 /* aka l mlawnin*/
 import { StatModule } from '../../../shared';
 
-//////////
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BsComponentModule } from '../../bs-component/bs-component.module';
-//import {TabsComponent} from '../../bs-component/components/tabs/tabs.component';
-
-/*import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { BsComponentComponent } from '../../bs-component/bs-component.component';
-import {
-    AlertComponent,
-    ButtonsComponent,
-    ModalComponent,
-    CollapseComponent,
-    DatePickerComponent,
-    DropdownComponent,
-    PaginationComponent,
-    PopOverComponent,
-    ProgressbarComponent,
-    TabsComponent,
-    RatingComponent,
-    TooltipComponent,
-    TimepickerComponent
-} from '../../bs-component/components';
-import { PageHeaderModule } from '../../../shared';*/
-
+////optimiser code//////
+//import { DiscretBarChartComponent } from '../../charts/discret-bar-chart/discret-bar-chart.component';
+//import { PieChartComponent } from '../../charts/pie-chart/pie-chart.component';
+//import {StackedBarChartComponent}  from '../../charts/stacked-bar-chart/stacked-bar-chart.component';
+import {ChartsModule} from '../../charts/charts.module';
 ////////////////
-
-/*export * from '../../bs-component/components/buttons/buttons.component';
-export * from '../../bs-component/components/alert/alert.component';
-export * from '../../bs-component/components/modal/modal.component';
-export * from '../../bs-component/components/collapse/collapse.component';
-export * from '../../bs-component/components/date-picker/date-picker.component';
-export * from '../../bs-component/components/dropdown/dropdown.component';
-export * from '../../bs-component/components/pagination/pagination.component';
-export * from '../../bs-component/components/pop-over/pop-over.component';
-export * from '../../bs-component/components/progressbar/progressbar.component';
-export * from '../../bs-component/components/tabs/tabs.component';
-export * from '../../bs-component/components/rating/rating.component';
-export * from '../../bs-component/components/tooltip/tooltip.component';
-export * from '../../bs-component/components/timepicker/timepicker.component';*/
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsComponentModule } from '../../bs-component/bs-component.module';
+//import { NbEmpParCategorieComponent } from './shared/nb-emp-par-categorie/nb-emp-par-categorie.component';
+import { NbEmpParGenreComponent } from './shared/nb-emp-par-genre/nb-emp-par-genre.component';
+import { EmpDiversHistoryComponent } from './emp-divers-history/emp-divers-history.component';
+import { EmpDiversVer2Component } from './emp-divers-ver2/emp-divers-ver2.component';
+//import { AgeMoyenParCategorieComponent } from './shared/age-moyen-par-categorie/age-moyen-par-categorie.component';
+//import { AncienneteParCategorieComponent } from './shared/anciennete-par-categorie/anciennete-par-categorie.component';
+//import { NbEmpParStructureComponent } from './shared/nb-emp-par-structure/nb-emp-par-structure.component';
+//import { NbEmpParGradeComponent } from './shared/nb-emp-par-grade/nb-emp-par-grade.component';
+//import { NbEmpParPosteComponent } from './shared/nb-emp-par-poste/nb-emp-par-poste.component';
+//import { NbEmpParFonctionComponent } from './shared/nb-emp-par-fonction/nb-emp-par-fonction.component';
 
 /////////////
 
@@ -75,34 +49,30 @@ export * from '../../bs-component/components/timepicker/timepicker.component';*/
     EmployeDiversiteRoutingModule,
 	NvD3Module ,
 	HttpClientModule,
-	//PageHeaderModule,
 	BsComponentModule,
-	NgbModule,
-	StatModule
+//	NgbModule,
+  StatModule,
+  ChartsModule,
+  NvD3Module
   ],
   declarations: [
-    Compo1Component,
+    EmployeDiversiteComponent,
 	BarchartComponent,
-    PieChartComponent,
+    //PieChartComponent,
     LineChartComponent,
     DonutChartComponent,
-	//TabsComponent
-	
-	//////////////
-	/* BsComponentComponent,
-        ButtonsComponent,
-        AlertComponent,
-        ModalComponent,
-        CollapseComponent,
-        DatePickerComponent,
-        DropdownComponent,
-        PaginationComponent,
-        PopOverComponent,
-        ProgressbarComponent,
-        TabsComponent,
-        RatingComponent,
-        TooltipComponent,
-        TimepickerComponent*/
+   // NbEmpParCategorieComponent,
+    NbEmpParGenreComponent,
+   EmpDiversHistoryComponent,
+   EmpDiversVer2Component,
+    //AgeMoyenParCategorieComponent,
+    //AncienneteParCategorieComponent,
+    //NbEmpParStructureComponent,
+    //NbEmpParGradeComponent,
+    //NbEmpParPosteComponent,
+    //NbEmpParFonctionComponent,
+   // DiscretBarChartComponent,
+    //StackedBarChartComponent
 	
   ],
   providers: [EmpDiversiteService],

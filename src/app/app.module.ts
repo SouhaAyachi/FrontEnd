@@ -10,7 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+//import { LineChart2Component } from './layout/charts/charts.module';
 //import { BsComponentModule } from '../../bs-component/bs-component.module';
+
+//import { RecrutementService } from './layout/rh/recrutement/recrutement.service';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -18,6 +22,7 @@ export function createTranslateLoader(http: HttpClient) {
     // return new TranslateHttpLoader(http, '/start-angular/SB-Admin-BS4-Angular-5/master/dist/assets/i18n/', '.json');
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -32,11 +37,14 @@ export function createTranslateLoader(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
-        AppRoutingModule,
+        NgbModule.forRoot(),//ngb Tabset pb resolved by this Lhamdoullelleh wachokr lelleh //https://github.com/ng-bootstrap/ng-bootstrap/issues/1952
+        AppRoutingModule,//.forRoot(RecrutementService),
+       // NgbModule
 		//BsComponentModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard],
-    bootstrap: [AppComponent]
+    providers: [AuthGuard,NgbModule],
+    bootstrap: [AppComponent],
+    entryComponents:[]
 })
 export class AppModule {}

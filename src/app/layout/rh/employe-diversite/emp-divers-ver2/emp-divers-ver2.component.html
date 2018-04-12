@@ -1,0 +1,237 @@
+
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  </div>
+  <div class="row">
+  <div class="col-sm-3">
+  <app-stat [bgClass]="'primary'"  [count]="[nbEmpTotal]" [label]="'Employés'" ></app-stat>
+  </div>
+  <div class="col-sm-3">
+  <app-stat [bgClass]="'warning'"  [count]="[ageMoyen]" [label]="'Age Moyen des Employés'" ></app-stat>
+  </div>
+  <div class="col-sm-3">
+  <app-stat [bgClass]="'success'"  [count]="[ancienneteMoyenne]" [label]="'Ancienneté Moyenne'" ></app-stat>
+  </div>
+  <div class="col-sm-3">
+      <br><br>
+      <a [routerLink]="['/EmpDiv/EmpDivDetaille']"><h2> = visit History =></h2></a>
+  </div>
+  </div>
+
+  <!--- ANb Employé 1.1 - -->
+  <div class="row mt-3">
+          <div class="col-sm-12 col-lg-6">
+              <div class="card">
+                  <div class="card-header"><b>Nombre d'employés</b>
+                      <div ngbDropdown class="d-inline-block dropdown pull-right">
+                      <button class="btn btn-outline-primary" ngbDropdownToggle>{{mesure}}</button>
+                          <div ngbDropdownMenu>
+                          <button class="dropdown-item" (click)="Par('genre')">Par Genre</button>
+                          <button class="dropdown-item" (click)="Par('structure')">Par Structure</button>
+                          <button class="dropdown-item" (click)="Par('grade')">Par Grade</button>
+                          <!--button class="dropdown-item" (click)="Par('fonction')">Par Fonction</button-->
+                          <ng-template #content let-c="close" let-d="dismiss"></ng-template>
+                          </div>
+                      </div>
+                      </div>
+                  <div class="card-body">
+                      <div class="row">
+                      <div class="col-lg-10">
+                          
+                         <div *ngIf="ParGenre && nbEmpParGenre"  > 
+                                <div *ngIf="Bar" >
+         <app-discret-bar-chart  [d]="nbEmpParGenre"  [height]="450" [key]="'Nb emp Par genre'" [XAxis]="'Genres'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>         
+                                    </div>   
+                               <div   *ngIf="Pie">
+                                  <app-pie-chart [d]="nbEmpParGenre" [height]="625" [threshold]="0.01"></app-pie-chart>
+                                  </div>
+                                 
+                              </div> 
+                      <div *ngIf="ParStructure && nbEmpParStructure"  > 
+                          <div *ngIf="Pie"  >
+                              <app-pie-chart [d]="nbEmpParStructure" [legend]="false"[height]="625" [threshold]="0.01" ></app-pie-chart>
+                          </div>
+                          <div *ngIf="Bar"  >
+                             <app-discret-bar-chart  [d]="nbEmpParStructure" [height]="450" [key]="'Nb emp Par structure'" [XAxis]="'Structures'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                          </div>
+                          </div>
+                          <div *ngIf="ParGrade && nbEmpParGrade" >  
+                                  <div *ngIf="Pie" >
+                                  <app-pie-chart [d]="nbEmpParGrade" [height]="625" [threshold]="0.01" [legend]="false"></app-pie-chart>
+                                  </div>
+                                  <div *ngIf="Bar">
+                                  <app-discret-bar-chart  [d]="nbEmpParGrade" [height]="450" [key]="'Nb emp Par grade'" [XAxis]="'Grades'" [YAxis]="'Nombre d\'mployés'"></app-discret-bar-chart>
+                                  </div>
+                          </div>     
+                      </div> 
+                          <div class="col-lg-2"><br><br><br><br><br>
+                              <button type="button"  (click)="changeGraphe('Pie')">Pie</button><br><br>
+                              <button type="button"  (click)="changeGraphe('Bar')">Bar</button><br><br>
+                              <button type="button"  (click)="changeGraphe('Tab')">Tab</button><br><br>
+                                    
+                          </div>   
+                      </div>
+                      
+                  </div>                               
+                  </div>
+              </div>
+     <!--age moyen-->
+          <div class="col-sm-12 col-lg-6">
+              <div class="row">
+                      <div class="col-sm-12 col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                        <b>Age Moyen<button class="primary pull-right col-sm-3" (click)="open(age)">Agrandir</button>
+                        </b> <div *ngIf="ParGenre && ageParGenre"  > 
+                      <div *ngIf="Pie" >
+                          <app-pie-chart [d]="ageParGenre" [height]="300" [legend]="false"></app-pie-chart>
+                          </div>
+                          <div *ngIf="Bar" >
+                          <app-discret-bar-chart [sizeBar]="75" [d]="ageParGenre" [height]="200" [key]="'age Par genre'" [XAxis]="'Genres'" [YAxis]="'ages d\'mployés'"></app-discret-bar-chart>         
+                         </div>
+                         </div> 
+                      
+                         <div *ngIf="ParStructure && ageParStructure" > 
+                            <div *ngIf="Pie"  >
+                                <app-pie-chart [d]="ageParStructure" [legend]="false" [height]="300"></app-pie-chart>
+                            </div>
+                            <div *ngIf="Bar" >
+                               <app-discret-bar-chart  [d]="ageParStructure" [showXAxis]="false" [height]="200" [key]="'age emp Par structure'" [XAxis]="'Structures'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                            </div>
+                            </div>
+                      <div *ngIf="ParGrade && ageParGrade" >  
+                                    <div *ngIf="Pie" >
+                                    <app-pie-chart [d]="ageParGrade" [legend]="false" [height]="300"></app-pie-chart>
+                                    </div>
+                                    <div *ngIf="Bar"  >
+                                    <app-discret-bar-chart  [d]="ageParGrade" [showXAxis]="false" [height]="200" [key]="'Nb emp Par grade'" [XAxis]="'Grades'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                                    </div>
+                            </div> 
+                        </div> 
+                     </div>
+              </div>
+              </div>
+          
+          <div class="row">
+                  <div class="col-sm-12 col-lg-12">
+                  <div class="card">
+                      <div class="card-body">
+                        <b>Ancienneté Moyenne<button class="primary pull-right col-sm-3" (click)="open(anciennete)">Agrandir</button>
+                        </b><div *ngIf="ParGenre && ancienneteParGenre" > 
+                          <div *ngIf="Pie" >
+                              <app-pie-chart [d]="ancienneteParGenre" [legend]="false" [height]="300"></app-pie-chart>
+                              </div>
+                              <div *ngIf="Bar" >
+                              <app-discret-bar-chart [sizeBar]="75" [d]="ancienneteParGenre" [height]="200" [key]="'anciennete Par genre'" [XAxis]="'Genres'" [YAxis]="'ages d\'mployés'"></app-discret-bar-chart>         
+                             </div> 
+                             </div>
+                          
+                             <div *ngIf="ParStructure && ancienneteParGenre"  > 
+                                <div *ngIf="Pie" >
+                                    <app-pie-chart [d]="ancienneteParStructure" [legend]="false"  [height]="300"></app-pie-chart>
+                                </div>
+                                <div *ngIf="Bar"  >
+                                   <app-discret-bar-chart  [d]="ancienneteParStructure" [showXAxis]="false" [height]="200" [key]="'anciennete emp Par structure'" [XAxis]="'Structures'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                                </div>
+                                </div>
+                          <div *ngIf="ParGrade && ancienneteParGenre">  
+                                        <div *ngIf="Pie" >
+                                        <app-pie-chart [d]="ancienneteParGrade" [legend]="false" [height]="300"></app-pie-chart>
+                                        </div>
+                                        <div *ngIf="Bar" >
+                                        <app-discret-bar-chart  [d]="ancienneteParGrade" [showXAxis]="false" [height]="200" [key]="'anciennete Par grade'" [XAxis]="'Grades'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                                        </div>
+                                </div> 
+                      <!--app-discret-bar-chart *ngIf="anciennete_moyenne_par_structure" id="app-discret-bar-chart" [d]="anciennete_moyenne_par_structure" [height]="200" [key]="'Anciennete moyenne par structure'" [XAxis]="'Structures'" [YAxis]="'Ancienneté moyenne d\'mployés'"></app-discret-bar-chart-->
+                      </div>
+                  </div>
+              </div>
+      </div>
+  </div>
+</div>
+  
+      
+  
+  
+ 
+  
+  <hr>
+  <!-- Modal Age-->
+  <ng-template #age let-c="close" let-d="dismiss">
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-sm-12 col-lg-12">
+                    <b>Age Moyen <button type="button" class="btn btn-primary pull-right" (click)="c('Close click')">close</button></b>
+                     <div *ngIf="ParGenre && ageParGenre"  > 
+                  <div *ngIf="Pie" >
+                      <app-pie-chart [d]="ageParGenre" [height]="550" [legend]="true"></app-pie-chart>
+                      </div>
+                      <div *ngIf="Bar" >
+                      <app-discret-bar-chart [sizeBar]="75" [d]="ageParGenre" [height]="450" [key]="'age Par genre'" [XAxis]="'Genres'" [YAxis]="'ages d\'mployés'"></app-discret-bar-chart>         
+                     </div>
+                     </div> 
+                  
+                     <div *ngIf="ParStructure && ageParStructure" > 
+                        <div *ngIf="Pie"  >
+                            <app-pie-chart [d]="ageParStructure" [legend]="false" [threshold]="0.01" [height]="550"></app-pie-chart>
+                        </div>
+                        <div *ngIf="Bar" >
+                           <app-discret-bar-chart  [d]="ageParStructure" [showXAxis]="false" [height]="450" [key]="'age emp Par structure'" [XAxis]="'Structures'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                        </div>
+                        </div>
+                  <div *ngIf="ParGrade && ageParGrade" >  
+                                <div *ngIf="Pie" >
+                                <app-pie-chart [d]="ageParGrade" [legend]="false" [threshold]="0.01"  [height]="550"></app-pie-chart>
+                                </div>
+                                <div *ngIf="Bar"  >
+                                <app-discret-bar-chart  [d]="ageParGrade" [showXAxis]="false" [height]="450" [key]="'Nb emp Par grade'" [XAxis]="'Grades'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                                </div>
+                        </div> 
+                   
+          </div>
+          </div>
+          </div>
+      </ng-template>
+
+
+<!--Modal Anciennete-->
+  <ng-template #anciennete let-c="close" let-d="dismiss">
+      <div class="modal-body modal-lg-9">
+          <div class="row">
+              <div class="col-sm-12 col-lg-12">
+             <b>Ancienneté Moyenne <button type="button" class="btn btn-primary pull-right" (click)="c('Close click')">close</button></b>
+             <div *ngIf="ParGenre && ancienneteParGenre" > 
+                          <div *ngIf="Pie" >
+                              <app-pie-chart [d]="ancienneteParGenre" [legend]="true" [threshold]="0.01" [height]="550"></app-pie-chart>
+                              </div>
+                              <div *ngIf="Bar" >
+                              <app-discret-bar-chart [sizeBar]="75" [d]="ancienneteParGenre" [height]="450" [key]="'anciennete Par genre'" [XAxis]="'Genres'" [YAxis]="'ages d\'mployés'"></app-discret-bar-chart>         
+                             </div> 
+                             </div>
+                          
+                             <div *ngIf="ParStructure && ancienneteParGenre"  > 
+                                <div *ngIf="Pie" >
+                                    <app-pie-chart [d]="ancienneteParStructure" [legend]="false"  [threshold]="0.01" [height]="550"></app-pie-chart>
+                                </div>
+                                <div *ngIf="Bar"  >
+                                   <app-discret-bar-chart  [d]="ancienneteParStructure"  [showXAxis]="false" [height]="450" [key]="'anciennete emp Par structure'" [XAxis]="'Structures'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                                </div>
+                                </div>
+                          <div *ngIf="ParGrade && ancienneteParGenre">  
+                                        <div *ngIf="Pie" >
+                                        <app-pie-chart [d]="ancienneteParGrade" [legend]="false" [threshold]="0.01" [height]="550"></app-pie-chart>
+                                        </div>
+                                        <div *ngIf="Bar" >
+                                        <app-discret-bar-chart  [d]="ancienneteParGrade" [showXAxis]="false" [height]="450" [key]="'anciennete Par grade'" [XAxis]="'Grades'" [YAxis]="'Age d\'mployés'"></app-discret-bar-chart>
+                                        </div>
+                                </div> 
+      </div>
+      </div>
+      </div>
+  </ng-template>
+
+  
+  
+  
+  
+  

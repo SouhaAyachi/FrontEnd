@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
 {path:'',
 	children:[
-	{path:'',loadChildren:'./employe-diversite/employe-diversite.module#EmployeDiversiteModule'}
+   //{path:'',loadChildren:'./employe-diversite/employe-diversite.module#EmployeDiversiteModule'},
+	//{path:'',loadChildren:'./employe-diversite/employe-diversite.module#EmployeDiversiteModule'}
 	]
 }
 
