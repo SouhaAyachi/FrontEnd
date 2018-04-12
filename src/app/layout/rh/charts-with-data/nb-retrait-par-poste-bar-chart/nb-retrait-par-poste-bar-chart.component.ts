@@ -39,9 +39,6 @@ export class NbRetraitParPosteBarChartComponent implements OnInit {
           axisLabel: 'Nb Embauche',
           axisLabelDistance: -10
         },
-        staggerLabels: true
-        // 
-        //
       }
     }
     this.recS.nbRetraiteParPoste().subscribe(data=>{
